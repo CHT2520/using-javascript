@@ -65,7 +65,7 @@ function updateFilmList(films){
         //change the content of this element e.g. <a>Winter's Bone</a>
         filmLink.innerHTML = film.title;
         //set the href attribute on this element e.g. <a href="#">Winter's Bone</a>
-        filmLink.setAttribute("href", "#");
+        filmLink.setAttribute("href", "/films/"+film.id);
         //create a new <div></div> element
         const filmLinkPara = document.createElement("p");
         //put the <a> inside the <p> e.g. <p><a href="#">Winter's Bone</a></p>
