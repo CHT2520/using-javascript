@@ -74,15 +74,14 @@ The `updateFilmList()` function is similar, however changing the content of the 
 
 - How can you expand this example so that it also shows films from the 1990s
   - You will need to add a new array for films from the 1990s, just add a couple of films.
-  - You will need to add a new button to the HTML page that the user can click on to display the films.
+  - You will need to add a new button to the HTML page the user can click on to display the films.
 - It would be nice if the year of the film was displayed next to the title of the film e.g. _Winter's Bone (2010)_.
   - How can you modify the code in `updateFilmList()` to do this.
 
 ## Externalising the data and using the Fetch API
-We don't want to hard code the date into the app, instead we want to load the data into the app. 
+We don't want to hard code the date into the app, instead we want to externlise the data and load it into the app. 
 - First comment out the arrays at the top of _app.js_. We aren't going to need these anymore.
-- Have a look in the data folder in VS Code.
-
+- Have a look in the *data* folder in VS Code.
   - Note that it contains a number of JSON files.
   - Open one of these files, note the structure of the JSON data.
     - See how the JSON data is slightly different to the plain JavaScripts arrays we have used so far.
