@@ -33,8 +33,6 @@ function init(){
   - When the user clicks on one of these links the function `changeDecade()` will be executed. 
   - Look in the HTML, make sure you can see how these links have been selected. 
 
-
-- When clicked the buttons call the function `changeDecade()`.
 - Have a look in _app.js_ for the function `changeDecade()`.
 
 ```javascript
