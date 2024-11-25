@@ -214,7 +214,7 @@ class Film extends Model
         @endforeach
       </div>
     </div>
-  </x-layout></x-layout
+  </x-layout>
 >
 ```
 
