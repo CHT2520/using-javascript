@@ -254,10 +254,10 @@ Route::get('/json/films/{decade}', [FilmController::class, 'listByDecade']);
 - Test this in a browser i.e. enter the URL http://localhost/json/films/2010
   - You should see the returned JSON data
 - Finally, we need to link to *app.js* in *index.blade.php*
-  - Add the following at the end of this file
+  - Add the following at the end of this file before the closing ` </x-layout>` tag.
 
 ```html
-  <script src='{{asset('js/app.js')}}'></script>
+  <script src="{{asset('js/app.js')}}"></script>
 ```
 - Test this works. 
 - Use the network tab in the browser to see the app loading the JSON files from the Laravel back-end. 
