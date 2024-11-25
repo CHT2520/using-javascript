@@ -198,7 +198,6 @@ class Film extends Model
   - it simply adds the hyperlinks for selecting the decade.
 
 ```html
-<x-layout title="List the films">
   <x-layout title="List the films">
     <div class="main-content">
       <div id="decadeNavHolder">
