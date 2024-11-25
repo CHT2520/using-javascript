@@ -277,6 +277,8 @@ This is a very simple example. Here are some ways it could be improved.
       return view('films.index', ['films' => $films, 'decade'=>$decade]);
   }
   ```
+  - If we change the links in *index.blade.php* to use the new route, the app would work without the user of JavaScript. 
 - The decade links are hard-coded into the HTML. Really these should be dynamically generated e.g. by querying the database to get a list of all possible decades, and then dynamically generating the decade buttons in *index.blade.php*.
+- Add some error checking e.g. if there aren't any films in the database from the selected decade we should display a suitable message to the user. 
 
 
