@@ -1,17 +1,17 @@
 //The data for the application
-// const filmsFrom2000s = [
-//     {id:4, title: 'The Incredibles', year:2004},
-//     {id:7, title:'Spirited Away', year:2001},
-//     {id:13, title: 'Mean Girls', year:2004}
-// ];
+const filmsFrom2000s = [
+    {id:4, title: 'The Incredibles', year:2004},
+    {id:7, title:'Spirited Away', year:2001},
+    {id:13, title: 'Mean Girls', year:2004}
+];
 
-// const filmsFrom2010s = [
-//     {id:3, title:"Winter's Bone", year:2010},
-//     {id:10, title:'Gravity',year:2013},
-//     {id:11, title:'Arrival',year:2016},
-//     {id:12, title:'Wonder Woman',year:2017},
-//     {id:16, title:'Get Out',year:2017}
-// ];
+const filmsFrom2010s = [
+    {id:3, title:"Winter's Bone", year:2010},
+    {id:10, title:'Gravity',year:2013},
+    {id:11, title:'Arrival',year:2016},
+    {id:12, title:'Wonder Woman',year:2017},
+    {id:16, title:'Get Out',year:2017}
+];
 
 function changeDecade(event){
     // stop the default link action
@@ -19,8 +19,13 @@ function changeDecade(event){
     // get the text inside the selected <a> element
     const decade = event.target.innerHTML;
     updateFilmsHeading(decade);
-    getFilms(decade);
+    if(decade === "2000"){
+        updateFilmList(filmsFrom2000s);
+    }else if(decade === "2010"){
+        updateFilmList(filmsFrom2010s);
+    }
 }
+
 function updateFilmsHeading(decade) {
     // get hold of the HTML element with an id of filmsHeading
     const filmsHeading = document.querySelector("#filmsHeading");
@@ -58,16 +63,7 @@ function init(){
       link.addEventListener("click",changeDecade,false);
   })
 }
-async function getFilms(decade) {
-    const url = "./data/" + decade + ".json";
-    try {
-      const response = await fetch(url);
-      const films = await response.json();
-      updateFilmList(films);
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
+
 
 //call the function init() when the page loads
 init();
