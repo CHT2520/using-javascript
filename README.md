@@ -1,4 +1,4 @@
-# Intro to JavaScript
+# Using Some JavaScript
 
 - Download this repository and unzip the folder.
 - Open the folder in VS Code.
