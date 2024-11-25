@@ -114,7 +114,7 @@ function changeDecade(event){
     // get the text inside the selected <a> element
     const decade = event.target.innerHTML;
     updateFilmsHeading(decade);
-    updateFilmList(decade);
+    getFilms(decade);
 }
 ```
 - Test the page in a browser.
