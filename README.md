@@ -215,7 +215,6 @@ class Film extends Model
       </div>
     </div>
   </x-layout>
->
 ```
 
 - Check this works, the homepage of the app should only show films from the 2000s.
