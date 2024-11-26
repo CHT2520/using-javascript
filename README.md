@@ -192,7 +192,7 @@ class Film extends Model
 
 - Finally, we need to modify the view
 - Open the _index.blade.php_ view and change it to the following
-  - it simply adds the hyperlinks for selecting the decade.
+  - We have simply added the hyperlinks for selecting the decade.
 
 ```html
   <x-layout title="List the films">
