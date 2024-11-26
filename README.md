@@ -277,5 +277,5 @@ This is a very simple example. Here are some ways it could be improved.
   - If we change the links in *index.blade.php* to use the new route, the app would work without the use of JavaScript. 
 - The decade links are hard-coded into the HTML. Really these should be dynamically generated e.g. by querying the database to get a list of all possible decades, and then dynamically generating the decade buttons in *index.blade.php*.
 - Add some error checking e.g. if there aren't any films in the database from the selected decade we should display a suitable message to the user. 
-- This is a simple example, we haven't really thought about how to name routes for fetch requests, and we just added an extra method in FilmController to respond to this. If we had a lot of fetch requests from JavaScript, our routes file and the `FilmController` could become bloated. Think about how you could structure and organise the back-end to make this more maintainable.
+- This is a simple example, we haven't really thought about how to name routes for fetch requests, and we just added an extra method in FilmController to respond to the the new route. If we had a lot of fetch requests from JavaScript, our routes file and the FilmController could become bloated. Think about how you could structure and organise the back-end to make this more maintainable.
 
