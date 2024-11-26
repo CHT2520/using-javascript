@@ -219,7 +219,7 @@ class Film extends Model
 
 - In the _public_ folder add a new folder, call it _js_
 - Copy the _app.js_ file from the earlier example and put it in this folder.
-- Modify the URL used for the `fetch`. Change the URL so we call a Laravel route instead of a JSON file. To do this change
+- Modify the URL used for the `fetch`. Change the URL so we call a Laravel route instead of a JSON file. To do this change:
 
 ```javascript
 const url = "./data/films/" + decade + ".json";
@@ -261,7 +261,7 @@ Route::get('/json/films/{decade}', [FilmController::class, 'listByDecade']);
 ## Limitations
 
 This is a very simple example. Here are some ways it could be improved.
-- If the user doesn't have JavaScript enabled in their browser, they won't be able to view the different decades. We could use the principle of 'progressive enhancement' make the app work without the use of JavaScript. We could then use the JavaScript to provide an enhanced experience for users that do have it enabled. 
+- If the user doesn't have JavaScript enabled in their browser, they won't be able to view films from different decades. We could use the principle of 'progressive enhancement' make the app work without the use of JavaScript. We could then use the JavaScript to provide an enhanced experience for users that do have it enabled. 
   - This isn't as tricky as it sounds. We would have to pass the decade as a route parameter e.g.
   ```php
   Route::get('/films/decade/{decade}', [FilmController::class, 'index']);
@@ -274,7 +274,7 @@ This is a very simple example. Here are some ways it could be improved.
       return view('films.index', ['films' => $films, 'decade'=>$decade]);
   }
   ```
-  - If we change the links in *index.blade.php* to use the new route, the app would work without the user of JavaScript. 
+  - If we change the links in *index.blade.php* to use the new route, the app would work without the use of JavaScript. 
 - The decade links are hard-coded into the HTML. Really these should be dynamically generated e.g. by querying the database to get a list of all possible decades, and then dynamically generating the decade buttons in *index.blade.php*.
 - Add some error checking e.g. if there aren't any films in the database from the selected decade we should display a suitable message to the user. 
 
