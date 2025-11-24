@@ -11,7 +11,7 @@ git clone https://github.com/CHT2520-web-prog/javascript
 - Download this repository and unzip it. Move the folder into your htdocs directory on XAMPP.
 
 ## Completing the practical work
-If you view the app on a web server you should find it is a simple app where JavaScript is used to dynamically diaplsy films from different decades. Here are some key points about how the app is working
+If you view the app on a web server you should find it is a simple app where JavaScript is used to dynamically display films from different decades. Here are some key points about how the app is working
 - At the moment the data for the app is stored in two arrays `filmsFrom2000s` and `filmsFrom2010s` .
   - Inside _app.js_, have a good look at the structure of these arrays, note that each film is stored as a JavaScript object.
 - Look at the bottom of *app.js*. The final line of code will call the function `init()`.
@@ -48,9 +48,9 @@ function changeDecade(event){
 }
 ```
 Every time an event happens e.g. the user clicks on an element. An `event` object is generated that can tell us information about the event e.g. the type of event and the element that was clicked (the `target` property). 
-- This example uses the `target` property to get hold of the hyperlink that generated the event
+- This example uses the `target` property to get hold of the hyperlink that generated the event.
 - `innerHTML` is used to look inside this element for the content of the element. This gives us the name of the decade that was selected. 
-- An `if` statement uses this value to call further functions `updateFilmsHeading()` and `updateFilmList()`
+- An `if` statement uses this value to call further functions `updateFilmsHeading()` and `updateFilmList()`.
 
 `updateFilmsHeading()` simply gets hold of the _H1_ element from the page and changes its content to show which decade has been selected.
 
@@ -58,7 +58,7 @@ Every time an event happens e.g. the user clicks on an element. An `event` objec
 function updateFilmsHeading(decade) {
     // get hold of the HTML element with an id of filmsHeading
     const filmsHeading = document.querySelector("#filmsHeading");
-    //change the content of this element e.g. <h1>2010s</h1>
+    //change the content of this element e.g. <h1>Films from the 2010s</h1>
     filmsHeading.innerHTML = "Films from the " + decade + "s";
 }
 ```
@@ -81,7 +81,6 @@ We don't want to hard code the date into the app, instead we want to externalise
 - Have a look in the *data* folder in VS Code.
   - Note that it contains a number of JSON files.
   - Open one of these files, note the structure of the JSON data.
-    - See how the JSON data is slightly different to the plain JavaScripts arrays we have used so far.
 
 - Add the following function in _app.js_
   - This function will load a JSON file.
@@ -99,7 +98,7 @@ async function getFilms(decade) {
 }
 ```
 - Modify the `changeDecade()` function so that it calls `getFilms()` instead of `updateFilmList()`
-  - Because we aren't having to switch between different arrays, we can also get rid of the `if` statement.
+  - Because we aren't having to switch between different arrays, we can also get rid of the `if` statement i.e.
 
 ```javascript
 function changeDecade(event){
@@ -113,14 +112,8 @@ function changeDecade(event){
 ```
 - Test the page in a browser.
 - In a browser 'right-click' on the page, select 'inspect', and select the 'console' tab.
-  - We can use the console to display messages for debugging.
-  - In the `getFilms()` function find the line of code that outputs to the console:
-    ```javascript
-    console.log(films);
-    ```
-  - In the console, you should be able to view this array of films that has been loaded from a JSON file.
-- Click on the buttons and see how the results change in the console (the 1990 button won't work).
-- Still in the browser, use the network tab to see the requests being made for the JSON data.
+  - We can use the console to display messages for debugging. In the console, you should be able to view the array of films that has been loaded from a JSON file.
+- Click on the decade buttons and see how the results change in the console (the 1990 button won't work).
 
 Finally, instead of showing the results in the console, we want them to appear in the page
 
@@ -139,7 +132,7 @@ updateFilmList(films);
 - Test this in a browser. The app should work as it did before, however, now the data is being loaded from the JSON files.
 
 ### Test your understanding
-- Create another JSON file, for storing data about films from the 1990s.
+- Create another JSON file for storing data about films from the 1990s.
 - Check this works.
 
 ## Integrating with a Laravel Back-End
@@ -148,19 +141,8 @@ updateFilmList(films);
 
 First we'll make some changes to the Laravel app, and then we'll integrate the JavaScript.
 
-### Making Changes to the Laravel App
-- Open _FilmController.php_
-- Modify the `index()` method in the _FilmController_ to look like the following:
-  - The model doesn't currently have a method called `byDecade()`, we'll add this next using a query scope.
-
-```php
-  function index()
-  {
-      $films = Film::byDecade(2000)->get();
-      return view('films.index', ['films' => $films]);
-  }
-```
-- Open the model and add a `scopeByDecade()` method.
+### Using a Query Scope
+- Open the Film model and add a `scopeByDecade()` method.
   - This uses a 'query scope' that allows us to customise queries on a model
     - In this case it will run an SQL query that retrieves all the films that have a year value within the specified range.
     - You can read more about query scopes here: https://laravel.com/docs/12.x/eloquent#query-scopes
@@ -181,7 +163,7 @@ class Film extends Model
     }
 }
 ```
-- Finally, we need to modify the view
+### Modify the view
 - Open the _index.blade.php_ view and change it to the following:
 
 ```html
@@ -200,13 +182,12 @@ class Film extends Model
         @endforeach
       </div>
     </div>
+    <script src="{{asset('js/app.js')}}"></script>
   </x-layout>
 ```
-- We have simply added the hyperlinks for selecting the decade.
+- We have simply added the hyperlinks for selecting the decade and a `<script>` tag that loads a JavaScript file. 
 
-- Check this works, the homepage of the app should only show films from the 2000s.
-
-## Integrating JavaScript
+## Adding the JavaScript and Routing
 - In the _public_ folder add a new folder, call it _js_
 - Copy the _app.js_ file from the earlier example and put it in this folder.
 - Modify the URL used for the `fetch`. Change the URL so we call a Laravel route instead of a JSON file. To do this change:
@@ -227,7 +208,9 @@ const url = "json/films/" + decade;
 Route::get('/json/films/{decade}', [FilmController::class, 'listByDecade']);
 ```
 - Add a `listByDecade()` method in FilmController.
-  - Note this method doesn't return a view, it returns JSON data
+  - This method calls the `byDecade` method we added to the model earlier.  
+  - Note this method doesn't return a view, it returns JSON data.
+    
 ```php
     function listByDecade($decade = 2000)
     {
@@ -244,8 +227,7 @@ Route::get('/json/films/{decade}', [FilmController::class, 'listByDecade']);
   <script src="{{asset('js/app.js')}}"></script>
 ```
 - Test this works. 
-- Use the network tab in the browser to see the app loading the JSON files from the Laravel back-end.
-- 
+
 ## Limitations
 This is a very simple example. Here are some ways it could be improved.
 - If the user doesn't have JavaScript enabled in their browser, they won't be able to view films from different decades. We could use the principle of 'progressive enhancement' make the app work without the use of JavaScript. We could then use the JavaScript to provide an enhanced experience for users that do have it enabled. 
