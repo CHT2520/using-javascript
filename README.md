@@ -3,7 +3,7 @@
 - Open your existing codespace (The one we used in the first four weeks of the module) https://github.com/codespaces.
 - In the terminal enter
 ```
-git clone https://github.com/CHT2520-web-prog/responsive-web-design
+git clone https://github.com/CHT2520-web-prog/javascript
 ```
 - This will copy the contents of this repository into your codespace.
 
