@@ -163,6 +163,26 @@ class Film extends Model
     }
 }
 ```
+### Adding a new route and controller method
+- Next, we need to add a route that will respond with JSON data for our JavaScript app. In _web.php_ add the following route
+
+```php
+Route::get('/json/films/{decade}', [FilmController::class, 'listByDecade']);
+```
+- Add a `listByDecade()` method in FilmController.
+  - This method calls the `byDecade` method we added to the model earlier.  
+  - Note this method doesn't return a view, it returns JSON data.
+    
+```php
+    function listByDecade($decade = 2000)
+    {
+        $films = Film::byDecade($decade)->get();
+        return response()->json($films);
+    }
+```
+- Test this in a browser i.e. enter the URL http://localhost/json/films/2010
+  - You should see the returned JSON data
+
 ### Modify the view
 - Open the _index.blade.php_ view and change it to the following:
 
@@ -186,47 +206,15 @@ class Film extends Model
   </x-layout>
 ```
 - We have simply added the hyperlinks for selecting the decade and a `<script>` tag that loads a JavaScript file. 
-
-## Adding the JavaScript and Routing
-- In the _public_ folder add a new folder, call it _js_
+- In the _public_ folder add a new folder, call it _js_.
 - Copy the _app.js_ file from the earlier example and put it in this folder.
-- Modify the URL used for the `fetch`. Change the URL so we call a Laravel route instead of a JSON file. To do this change:
+- inside this file, modify the URL used for the `fetch`. Change the URL so we call the Laravel route instead of a JSON file. To do this change:
 
 ```javascript
 const url = "./data/films/" + decade + ".json";
 ```
 
-to
-
-```javascript
-const url = "json/films/" + decade;
-```
-
-- Next, we need to add a route for this URI. In _web.php_ add the following route
-
-```php
-Route::get('/json/films/{decade}', [FilmController::class, 'listByDecade']);
-```
-- Add a `listByDecade()` method in FilmController.
-  - This method calls the `byDecade` method we added to the model earlier.  
-  - Note this method doesn't return a view, it returns JSON data.
-    
-```php
-    function listByDecade($decade = 2000)
-    {
-        $films = Film::byDecade($decade)->get();
-        return response()->json($films);
-    }
-```
-- Test this in a browser i.e. enter the URL http://localhost/json/films/2010
-  - You should see the returned JSON data
-- Finally, we need to link to *app.js* in *index.blade.php*
-  - Add the following at the end of this file before the closing ` </x-layout>` tag.
-
-```html
-  <script src="{{asset('js/app.js')}}"></script>
-```
-- Test this works. 
+- Test this works. From the homepage the user should be able to select different decades and the list of films should update. 
 
 ## Limitations
 This is a very simple example. Here are some ways it could be improved.
